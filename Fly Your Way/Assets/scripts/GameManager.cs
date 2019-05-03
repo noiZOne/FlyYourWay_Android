@@ -23,25 +23,16 @@ public class GameManager : MonoBehaviour {
     private string gameID = "3128029";
     private bool testmode = false;
     private string video_ad = "video";
-    //private string banner_ad = "MenuBanner";
-
+    
 
     //Einbindung der Werbung von Unity
     private void Start()
     {
        Advertisement.Initialize(gameID, testmode);
-      //  showBanner();
         
     }
 
-    //public void showBanner()
-    //{
-    //    if (Advertisement.IsReady(banner_ad))
-    //    {
-    //        Advertisement.Banner.Show(banner_ad);
-
-    //    }
-    //}
+   
     enum PageState {
 		None,
 		Start,
@@ -92,33 +83,33 @@ public class GameManager : MonoBehaviour {
     }
 
                                                                                  
-    public void SpeedUp()                                                        // Erhöhen der Geschwindigkeit alle 10 Punkte um 0,5
+    public void SpeedUp()                                                         // Erhöhen der Geschwindigkeit alle 10 Punkte um 0,5
     {
         if (score % 10 == 0)
         {
             PipeSpawner.shiftSpeed = PipeSpawner.shiftSpeed + PipeSpawner.speedUp;
-           
+            Debug.Log("Speed set to: " + PipeSpawner.shiftSpeed);                     //Log Ausgabe der Geschwindigeit
         }
 
     }
 
 
     public void OnPlayerDied() {
-        gameOverScore.text = score.ToString();                                    // Set score to GameOverScore
+        gameOverScore.text = score.ToString();                                        // Set score to GameOverScore
         gameOver = true;
 
                                                                             
         PipeSpawner.shiftSpeed = 3.5f;                                            // Reset Shiftspeed after death!
 
-       playTheAd();                                                              // Video Werbng abspielen
+       //playTheAd();                                                              // Video Werbng abspielen
 
-        //System.Random rnd = new System.Random();                                // Werbung nur abspielen wenn random Zahl gerade ist!
-        //int adRnd = rnd.Next(1, 101);
-        //if (adRnd % 2 == 0)
-        //{
-        //    playTheAd();
-        //}
-        // Debug.Log(adRnd);                                                  // Log Ausgebe zur kontrolle der Funktion
+        System.Random rnd = new System.Random();                                // Werbung nur abspielen wenn random Zahl gerade ist!
+        int adRnd = rnd.Next(1, 101);
+        if (adRnd % 2 == 0)
+        {
+            playTheAd();
+        }
+        Debug.Log("Zufallszahl ist: " + adRnd);                                    // Log Ausgebe zur kontrolle der Funktion
 
         int savedScore = PlayerPrefs.GetInt("HighScore");
 		if (score > savedScore) {
@@ -139,13 +130,13 @@ public class GameManager : MonoBehaviour {
 				startPage.SetActive(true);
 				gameOverPage.SetActive(false);
 				countdownPage.SetActive(false);
-                pauseButton.SetActive(false);
+                pauseButton.SetActive(true);
 				break;
 			case PageState.Countdown:
 				startPage.SetActive(false);
 				gameOverPage.SetActive(false);
 				countdownPage.SetActive(true);
-                pauseButton.SetActive(false);
+                pauseButton.SetActive(true);
                 break;
 			case PageState.GameOver:
 				startPage.SetActive(false);
