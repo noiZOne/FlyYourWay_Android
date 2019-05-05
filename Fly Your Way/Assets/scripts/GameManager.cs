@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	public Text scoreText;
     public PipeSpawner pipeSpawner;
     public Text gameOverScore;
+    public TapController TapController;
     
     private string gameID = "3128029";
     private bool testmode = false;
@@ -75,11 +76,23 @@ public class GameManager : MonoBehaviour {
 	}
 
 
-	public void OnPlayerScored() {
-		score++;
+    public void OnPlayerScored()
+    {
+
+        if (TapController.pointsMultiplier == true)
+        {
+            score = score + 3;
+        }
+        else
+        {
+            score++;
+        }
+
         scoreText.text = score.ToString();
-       
+        if (PipeSpawner.shiftSpeed < PipeSpawner.maxSpeed)                        // NUr schneller werden, wenn langsamer als 8
+        { 
         SpeedUp();                                                                //Aufrufen der Geschiwindigkeitserhöhung
+        }
     }
 
                                                                                  
@@ -103,13 +116,13 @@ public class GameManager : MonoBehaviour {
 
        //playTheAd();                                                              // Video Werbng abspielen
 
-        System.Random rnd = new System.Random();                                // Werbung nur abspielen wenn random Zahl gerade ist!
-        int adRnd = rnd.Next(1, 101);
-        if (adRnd % 2 == 0)
-        {
+       // System.Random rnd = new System.Random();                                // Werbung nur abspielen wenn random Zahl gerade ist!
+       // int adRnd = rnd.Next(1, 101);
+       // if (adRnd % 2 == 0)
+       // {
             playTheAd();
-        }
-        Debug.Log("Zufallszahl ist: " + adRnd);                                    // Log Ausgebe zur kontrolle der Funktion
+       // }
+       // Debug.Log("Zufallszahl ist: " + adRnd);                                    // Log Ausgebe zur kontrolle der Funktion
 
         int savedScore = PlayerPrefs.GetInt("HighScore");
 		if (score > savedScore) {

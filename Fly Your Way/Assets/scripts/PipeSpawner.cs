@@ -13,7 +13,8 @@ public class PipeSpawner : MonoBehaviour
     }
 
     public GameObject PipePrefab;
-    public static float shiftSpeed = 3.5f;
+    public static float shiftSpeed = 3.5f;                                      // 3,5 default
+    public static float maxSpeed = 8f;
     public float spawnRate;                                                     // 1,7 by default
     public static float speedUp = 0.5f;                                         // Wert der ehöhung der Shiftgeschwindigkeit des Spiels
     public SpawnHeight spawnHeight;
