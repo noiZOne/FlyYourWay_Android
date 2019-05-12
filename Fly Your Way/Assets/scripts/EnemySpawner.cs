@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public GameObject EnemyPrefab;
-    public static float shiftSpeed = 2.0f;
+    public static float shiftSpeed = 2.8f;
     public float spawnRate;                                                     // 3 by default
     public static float speedUp = 0.5f;                                         // Wert der ehöhung der Shiftgeschwindigkeit des Spiels
     public SpawnHeight spawnHeight;

@@ -10,7 +10,8 @@ public class TapController : MonoBehaviour
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
     public static event PlayerDelegate OnPlayerScored;
-    public new PolygonCollider2D collider;
+    public PolygonCollider2D colliderPlane;
+    public PolygonCollider2D colliderShip;
     public Text playerLifeText;
     public ParticleSystem shild;
     public ParticleSystem multi;
@@ -94,11 +95,13 @@ public class TapController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
     }
 
-    IEnumerator ColliderSwitcherDeadZone()          //1 Sekunde den Collider deaktivieren nach Crash
+    IEnumerator ColliderSwitcherDeadZone()          //2 Sekunde den Collider deaktivieren nach Crash
     {
-        collider.enabled = false;
-        yield return new WaitForSecondsRealtime(1);
-        collider.enabled = true;
+        colliderPlane.isTrigger = false;
+        colliderShip.isTrigger = false;
+        yield return new WaitForSeconds(2);
+        colliderPlane.isTrigger = true;
+        colliderShip.isTrigger = true;
     }
 
     IEnumerator ColliderSwitcherShild()             //10 Sekunden unzerstörbar nach aufsammeln des Shilds
@@ -106,8 +109,8 @@ public class TapController : MonoBehaviour
         IsShildActivated = true;
         shild.Play();
         yield return new WaitForSecondsRealtime(10);
-        IsShildActivated = false;
         shild.Stop();
+        IsShildActivated = false;
     }
 
     IEnumerator PointsMultplier()               //10 Sekunden points x3 nach PowerUp
@@ -117,7 +120,6 @@ public class TapController : MonoBehaviour
         yield return new WaitForSecondsRealtime(10);
         multi.Stop();
         pointsMultiplier = false;
-        
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -163,7 +165,7 @@ public class TapController : MonoBehaviour
             }
             if (col.gameObject.tag == "PowerUpShild")
             {
-                StartCoroutine(ColliderSwitcherShild());    //unbeseigbar für 10Sekunden
+                StartCoroutine(ColliderSwitcherShild());    //unbesiegbar für 10Sekunden
                 //Debug.Log("you got a shild fo 10 sec");
                 
                 //shildSound.Play();                   Insert SoundFile!!!

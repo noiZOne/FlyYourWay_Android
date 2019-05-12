@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject startPage;
 	public GameObject gameOverPage;
 	public GameObject countdownPage;
+    public GameObject helpPage;
     public GameObject pauseButton;
 	public Text scoreText;
     public PipeSpawner pipeSpawner;
@@ -89,9 +90,11 @@ public class GameManager : MonoBehaviour {
         }
 
         scoreText.text = score.ToString();
-        if (PipeSpawner.shiftSpeed < PipeSpawner.maxSpeed)                        // NUr schneller werden, wenn langsamer als 8
-        { 
-        SpeedUp();                                                                //Aufrufen der Geschiwindigkeitserhöhung
+        if (PipeSpawner.shiftSpeed < PipeSpawner.maxSpeed)                        // Max Speed of the Shift
+        {
+            //Aufrufen der Geschiwindigkeitserhöhung
+            SpeedUp();
+            SpeedUpPowerUp();
         }
     }
 
@@ -106,13 +109,24 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void SpeedUpPowerUp()                                                         // Erhöhen der Geschwindigkeit alle 10 Punkte um 0,5
+    {
+        if (score % 10 == 0)
+        {
+            PowerUpSpawner.shiftSpeed = PowerUpSpawner.shiftSpeed + PowerUpSpawner.speedUp;
+            Debug.Log("PowerUp Speed set to: " + PowerUpSpawner.shiftSpeed);                     //Log Ausgabe der Geschwindigeit
+        }
+
+    }
+
 
     public void OnPlayerDied() {
-        gameOverScore.text = score.ToString();                                        // Set score to GameOverScore
+        gameOverScore.text = score.ToString();                                    // Set score to GameOverScore
         gameOver = true;
 
-                                                                            
-        PipeSpawner.shiftSpeed = 3.5f;                                            // Reset Shiftspeed after death!
+                                                                                    // Reset Shiftspeed after death!
+        PipeSpawner.shiftSpeed = 3.5f;
+        PowerUpSpawner.shiftSpeed = 3.5f;
 
        //playTheAd();                                                              // Video Werbng abspielen
 
@@ -138,24 +152,28 @@ public class GameManager : MonoBehaviour {
 				gameOverPage.SetActive(false);
 				countdownPage.SetActive(false);
                 pauseButton.SetActive(true);
+                helpPage.SetActive(false);
 				break;
 			case PageState.Start:
 				startPage.SetActive(true);
 				gameOverPage.SetActive(false);
 				countdownPage.SetActive(false);
                 pauseButton.SetActive(true);
-				break;
+                helpPage.SetActive(false);
+                break;
 			case PageState.Countdown:
 				startPage.SetActive(false);
 				gameOverPage.SetActive(false);
 				countdownPage.SetActive(true);
                 pauseButton.SetActive(true);
+                helpPage.SetActive(false);
                 break;
 			case PageState.GameOver:
 				startPage.SetActive(false);
 				gameOverPage.SetActive(true);
 				countdownPage.SetActive(false);
                 pauseButton.SetActive(false);
+                helpPage.SetActive(false);
                 break;
 		}
 	}

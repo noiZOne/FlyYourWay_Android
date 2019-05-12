@@ -6,7 +6,7 @@ public class hidePowerUp : MonoBehaviour
 {
     
 
-    // Zerstören des Kanisters beim Treffen mit dem Flugzeug
+    //Hide the PowerUp after collect
     void OnTriggerEnter2D(Collider2D col)
     {
         
@@ -14,7 +14,7 @@ public class hidePowerUp : MonoBehaviour
         {
             GetComponent<Renderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
-            //Destroy(gameObject);
+            
 
         }
 

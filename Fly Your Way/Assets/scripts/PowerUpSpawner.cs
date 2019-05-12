@@ -18,11 +18,11 @@ public class PowerUpSpawner : MonoBehaviour
     public GameObject PowerUpGodmodePrefab;                 //GodMode PowerUp
     int wichPower;                                          //Randomnumer for the PowerUp to spawn    1-3
     
-    GameObject PowerUpToSpawn;                           //Wich PowerUp to spawn
+    GameObject PowerUpToSpawn;                              //Wich PowerUp to spawn
     public TapController TapController;
 
-    public static float shiftSpeed = 3.0f;
-    public float spawnRate;                                                     // 3 by default
+    public static float shiftSpeed = 3.5f;
+    public float spawnRate;                                                     // 12 by default
     public static float speedUp = 0.5f;                                         // Wert der ehöhung der Shiftgeschwindigkeit des Spiels
     public SpawnHeight spawnHeight;
     public Vector3 spawnPos;
@@ -120,7 +120,7 @@ public class PowerUpSpawner : MonoBehaviour
                 {
                     GameObject temp = powerUps[i].gameObject;
                     powerUps.RemoveAt(i);
-                    Destroy(temp, 1f);
+                    Destroy(temp, 15f);
                 }
             }
         }
@@ -133,7 +133,7 @@ public class PowerUpSpawner : MonoBehaviour
                                                                                 // declaring the PowerUp wich will be spawned
             if(adRnd == 1 )
             {
-            if (TapController.playerLife <= 4)
+            if (TapController.playerLife <= 3)
                 {
                 PowerUpToSpawn = PowerUpLifePrefab;
                 }

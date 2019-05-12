@@ -24,7 +24,7 @@ public class playerSelection : MonoBehaviour
     }
     void Start()
     {
-        // playerRenderer.sprite = OriginalSprite;
+       
     }
 
     // Update is called once per frame
@@ -35,19 +35,17 @@ public class playerSelection : MonoBehaviour
 
         public void originalPlane()
         {
-            if (playerRenderer.sprite != null)
-            {
+            
                 playerRenderer.sprite = OriginalSprite;
-            }
+            
 
         }
 
         public void darkPlane()
         {
-            if (playerRenderer.sprite != null)
-            {
-                playerRenderer.sprite = DarkSprite;
-            }
+            
+             playerRenderer.sprite = DarkSprite;
+            
 
         }
 

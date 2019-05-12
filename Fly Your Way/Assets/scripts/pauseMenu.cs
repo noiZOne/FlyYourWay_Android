@@ -11,6 +11,7 @@ public class pauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUi;
     public GameObject skinMenuUi;
+    public GameObject helpMenuUi;
 
     
 
@@ -35,6 +36,7 @@ public class pauseMenu : MonoBehaviour
     {
         pauseMenuUi.SetActive(false);
         skinMenuUi.SetActive(false);
+        helpMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
         //CloseBannerAd();
@@ -56,6 +58,14 @@ public class pauseMenu : MonoBehaviour
         GameIsPaused = true;
         skinMenuUi.SetActive(true);
 
+    }
+
+    public void Help()
+    {
+        pauseMenuUi.SetActive(false);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+        helpMenuUi.SetActive(true);
     }
 
     public void QuitGame()
