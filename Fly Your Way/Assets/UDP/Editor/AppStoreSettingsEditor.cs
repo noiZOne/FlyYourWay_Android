@@ -1000,7 +1000,7 @@ namespace UnityEngine.UDP.Editor
         private bool _inAppPurchaseFoldout = true;
         private bool _udpClientSettingsFoldout = false;
         private bool _testAccountFoldout = false;
-        private List<bool> _iapItemsFoldout = new List<bool>(); // TODO: Update this by API
+        private List<bool> _iapItemsFoldout = new List<bool>(); 
         private List<IapItem> _iapItems = new List<IapItem>();
         private List<bool> _iapItemDirty = new List<bool>();
         private List<string> _iapValidationMsg = new List<string>();

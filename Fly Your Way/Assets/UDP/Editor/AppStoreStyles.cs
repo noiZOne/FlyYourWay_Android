@@ -27,12 +27,7 @@ namespace UnityEngine.UDP.Editor
                 }
             }
 
-//TODO: this will cause a NPE error, figure out why            
-//            public static readonly GUIStyle kAppStoreSettingsHeaderGuiStyle2 = new GUIStyle(EditorStyles.foldout)
-//            {
-//                fontSize = 12,
-//                fontStyle = FontStyle.Bold
-//            };
+
 
             public const int kClientLabelWidth = 140;
             public static int kTestAccountBoxHeight = 25;

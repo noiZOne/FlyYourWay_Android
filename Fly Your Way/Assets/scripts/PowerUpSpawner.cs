@@ -60,7 +60,7 @@ public class PowerUpSpawner : MonoBehaviour
 
         void OnGameOverConfirmed()
         {
-            TapController.playerLife = 3;
+           // TapController.playerLife = 3;
             for (int i = powerUps.Count - 1; i >= 0; i--)
             {
                 GameObject temp = powerUps[i].gameObject;
@@ -128,23 +128,23 @@ public class PowerUpSpawner : MonoBehaviour
         void WichPowerUpToSpawn()
         {
         System.Random rnd = new System.Random();                                // Take the random Number for PowerUp
-        int adRnd = rnd.Next(1, 4);
+        int adRnd = rnd.Next(1, 3);
          // Debug.Log(adRnd);
                                                                                 // declaring the PowerUp wich will be spawned
-            if(adRnd == 1 )
-            {
-            if (TapController.playerLife <= 3)
-                {
-                PowerUpToSpawn = PowerUpLifePrefab;
-                }
-            return;
-            }
-            if (adRnd == 2)
+            //if(adRnd == 1 )
+            //{
+            //if (TapController.playerLife <= 3)
+            //    {
+            //    PowerUpToSpawn = PowerUpLifePrefab;
+            //    }
+            //return;
+            //}
+            if (adRnd == 1)
             {
                 PowerUpToSpawn = PowerUpPointMultiPrefab;
             }
 
-            if (adRnd == 3)
+            if (adRnd == 2)
             {
                 PowerUpToSpawn = PowerUpGodmodePrefab;
             }

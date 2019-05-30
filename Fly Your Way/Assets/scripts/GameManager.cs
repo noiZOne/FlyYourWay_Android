@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
@@ -21,11 +22,19 @@ public class GameManager : MonoBehaviour {
     public PipeSpawner pipeSpawner;
     public Text gameOverScore;
     public TapController TapController;
+    public GameObject NewHighscore;
+    
     
     private string gameID = "3128029";
     private bool testmode = false;
+    private bool HighscoreIsPlayed;
     private string video_ad = "video";
+
+    public int score = 0;
+    bool gameOver = true;
+
     
+
 
     //Einbindung der Werbung von Unity
     private void Start()
@@ -42,8 +51,6 @@ public class GameManager : MonoBehaviour {
 		GameOver
 	}
 
-	public int score = 0;
-	bool gameOver = true;
 
 	public bool GameOver { get { return gameOver; } }
 
@@ -74,9 +81,22 @@ public class GameManager : MonoBehaviour {
 		OnGameStarted();
 		score = 0;
 		gameOver = false;
+        HighscoreIsPlayed = false;
 	}
 
+    IEnumerator NewHighscoreReached()               
+    {
 
+        if(HighscoreIsPlayed == false)
+        {
+            NewHighscore.SetActive(true);
+            yield return new WaitForSeconds(2);
+            NewHighscore.SetActive(false);
+            HighscoreIsPlayed = true;
+        }
+        
+
+    }
     public void OnPlayerScored()
     {
 
@@ -88,7 +108,11 @@ public class GameManager : MonoBehaviour {
         {
             score++;
         }
-
+        int savedScore1 = PlayerPrefs.GetInt("HighScore");
+        if (score > savedScore1)
+        {
+            StartCoroutine(NewHighscoreReached());
+        }
         scoreText.text = score.ToString();
         if (PipeSpawner.shiftSpeed < PipeSpawner.maxSpeed)                        // Max Speed of the Shift
         {
@@ -200,6 +224,12 @@ public class GameManager : MonoBehaviour {
 
         }
 
+    }
+
+    public void ResetScore()
+    {
+        PlayerPrefs.DeleteAll();
+        
     }
 
 }

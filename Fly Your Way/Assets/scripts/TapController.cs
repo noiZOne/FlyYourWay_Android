@@ -18,7 +18,7 @@ public class TapController : MonoBehaviour
     public ParticleSystem life;
     
 
-    public int playerLife = 3;
+    // public int playerLife = 1;
     public float tapForce = 10;
     public float tiltSmooth = 2;
     public Vector3 startPos;
@@ -39,7 +39,7 @@ public class TapController : MonoBehaviour
 
     void Start()
     {
-        playerLifeText.text = playerLife.ToString();
+        // playerLifeText.text = playerLife.ToString();
         rigidBody = GetComponent<Rigidbody2D>();
         downRotation = Quaternion.Euler(0, 0, -65);
         forwardRotation = Quaternion.Euler(0, 0, 55);
@@ -79,7 +79,7 @@ public class TapController : MonoBehaviour
 
     void Update()
     {
-        playerLifeText.text = playerLife.ToString();
+       // playerLifeText.text = playerLife.ToString();
 
         if (game.GameOver) return;
         if (pauseMenu.GameIsPaused) return;                                 // Kein Input bei aktiver Pause
@@ -127,48 +127,58 @@ public class TapController : MonoBehaviour
         {
             OnPlayerScored();
             scoreSound.Play();
+            // Handheld.Vibrate();
 
         }
         if (col.gameObject.tag == "DeadZone")
         {
             if (IsShildActivated == false)
             {
-                playerLife--;
-                StartCoroutine(ColliderSwitcherDeadZone());
-                Debug.Log("You have " + playerLife + " Lives left");
-                dieSound.Play();
+               // StartCoroutine(ColliderSwitcherDeadZone());
+               //// playerLife--;
+               // Handheld.Vibrate(); 
+               //// Debug.Log("You have " + playerLife + " Lives left");
+               // dieSound.Play();
 
-                if (playerLife <= 0)
+               // if (playerLife <= 0)
 
-                {
+               // {
                     rigidBody.simulated = false;
                     OnPlayerDied();
-                }
+                //}
             }
         }
 
-        if (col.gameObject.tag == "PowerUpLife")
-            {
-            life.Play();    
-            playerLife++;
+
+        // TODO: Insert Sounds for PowerUps   
+
+        //if (col.gameObject.tag == "PowerUpLife")
+        //    {
+        //    life.Play();    
+        //    playerLife++;
+        //    Handheld.Vibrate();
             
            // Debug.Log("+1 Life! You gt now: " + playerLife);
-            //lifeUpSound.Play();                   Insert SoundFile!!!
-            }
+            //lifeUpSound.Play();                  
+            //}
 
             if (col.gameObject.tag == "PowerUpMultiplier")
             {
-                StartCoroutine(PointsMultplier());
+            Handheld.Vibrate();
+            StartCoroutine(PointsMultplier());
                // Debug.Log("*3 Multiplier");
-               
-                //multiplierSound.Play();                   Insert SoundFile!!!
+
+          
+                //multiplierSound.Play();                  
             }
             if (col.gameObject.tag == "PowerUpShild")
             {
-                StartCoroutine(ColliderSwitcherShild());    //unbesiegbar für 10Sekunden
+
+            Handheld.Vibrate();
+            StartCoroutine(ColliderSwitcherShild());    //unbesiegbar für 10Sekunden
                 //Debug.Log("you got a shild fo 10 sec");
                 
-                //shildSound.Play();                   Insert SoundFile!!!
+                //shildSound.Play();                  
             }
     }
 
